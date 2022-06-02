@@ -83,6 +83,7 @@ create table if not exists argosdb.inventory_items (
     id varchar(36) not null,
     status int not null,
     amount int not null check (amount >= 0),
+    updated_at datetime,
     product_id varchar(36) not null,
     foreign key (product_id) references products(id)
 );
