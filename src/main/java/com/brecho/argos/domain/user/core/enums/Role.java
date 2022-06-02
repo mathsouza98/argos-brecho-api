@@ -1,4 +1,4 @@
-package com.brecho.argos.domain.enums;
+package com.brecho.argos.domain.user.core.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

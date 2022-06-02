@@ -1,5 +1,6 @@
-package com.brecho.argos.domain.models;
+package com.brecho.argos.domain.sale.core.models;
 
+import com.brecho.argos.domain.user.core.models.Advertiser;
 import lombok.Getter;
 import lombok.Setter;
 

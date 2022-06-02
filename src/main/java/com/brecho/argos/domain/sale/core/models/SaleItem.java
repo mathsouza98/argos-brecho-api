@@ -1,4 +1,4 @@
-package com.brecho.argos.domain.models;
+package com.brecho.argos.domain.sale.core.models;
 
 import lombok.Getter;
 import lombok.Setter;
