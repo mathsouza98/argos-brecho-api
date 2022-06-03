@@ -7,10 +7,10 @@ import lombok.Setter;
 @Setter
 public class Address {
     private String id;
-    private String countryCode;
+    private String stateCode;
     private String streetName;
-    private String number;
+    private int number;
     private String zipcode;
     private String complement;
-    private Person person;
+    private User person;
 }

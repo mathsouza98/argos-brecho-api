@@ -1,6 +1,6 @@
 package com.brecho.argos.domain.sale.core.models;
 
-import com.brecho.argos.domain.user.core.models.Advertiser;
+import com.brecho.argos.domain.user.core.models.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +15,6 @@ public class Product {
     private BigDecimal price;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private Advertiser advertiser;
+    private User advertiser;
     private ProductClassification productClassification;
 }

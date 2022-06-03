@@ -1,50 +1,25 @@
 create database argosdb;
 
-create table if not exists argosdb.people (
-    id varchar(36) not null,
-    name varchar(20) not null,
-    email varchar(50) not null unique,
-    cpf varchar(11) not null unique,
-    birthdate date,
-    primary key (id)
-);
-
 create table if not exists argosdb.phones (
     id varchar(36) not null,
     region_code varchar(2) not null,
     value varchar(15) not null,
-    person_id varchar(36) not null,
-    foreign key (person_id) references people(id),
+    user_id varchar(36) not null,
+    foreign key (user_id) references users(id),
     primary key (id)
 );
 
-create table if not exists argosdb.admins (
+create table if not exists argosdb.users (
     id varchar(36) not null,
-    username varchar(50) not null,
+    username varchar(20) not null,
     password varchar(100) not null,
-    created_at datetime not null,
-    updated_at datetime,
+    name varchar(50) not null,
+    email varchar(50) not null unique,
+    cpf varchar(11) not null unique,
+    birthdate date,
     role int not null,
-    person_id varchar(36) not null,
-    foreign key (person_id) references people(id),
-    primary key (id)
-);
-
-create table if not exists argosdb.advertisers (
-    id varchar(36) not null,
     created_at datetime not null,
     updated_at datetime,
-    person_id varchar(36) not null,
-    foreign key (person_id) references people(id),
-    primary key (id)
-);
-
-create table if not exists argosdb.customers (
-    id varchar(36) not null,
-    created_at datetime not null,
-    updated_at datetime,
-    person_id varchar(36) not null,
-    foreign key (person_id) references people(id),
     primary key (id)
 );
 
@@ -56,8 +31,8 @@ create table if not exists argosdb.addresses (
     number int not null,
     zipcode varchar(15) not null,
     complement varchar(50),
-    person_id varchar(36) not null,
-    foreign key (person_id) references people(id),
+    user_id varchar(36) not null,
+    foreign key (user_id) references users(id),
     primary key (id)
 );
 
@@ -90,7 +65,9 @@ create table if not exists argosdb.inventory_items (
 
 create table if not exists argosdb.sales (
     id varchar(36) not null,
+    status int not null,
     created_at datetime not null,
+    updated_at datetime not null,
     total_value decimal(7,2) not null check (total_value > 0.00),
     customer_id varchar(36) not null,
     primary key (id),

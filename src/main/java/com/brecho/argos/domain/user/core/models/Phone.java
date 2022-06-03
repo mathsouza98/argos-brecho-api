@@ -9,5 +9,5 @@ public class Phone {
     private String id;
     private String regionCode;
     private String value;
-    private Person person;
+    private User person;
 }
