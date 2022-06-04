@@ -15,6 +15,6 @@ public class Product {
     private BigDecimal price;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private User advertiser;
+    private User seller;
     private ProductClassification productClassification;
 }

@@ -1,5 +1,6 @@
 package com.brecho.argos.domain.sale.core.models;
 
+import com.brecho.argos.domain.sale.core.enums.InventoryItemStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 public class InventoryItem {
     private String id;
-    private int status;
+    private InventoryItemStatus status;
     private int amount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

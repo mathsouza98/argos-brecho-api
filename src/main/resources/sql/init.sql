@@ -47,11 +47,11 @@ create table if not exists argosdb.products (
     price decimal(7,2) not null check (price > 0.00),
     created_at datetime not null,
     updated_at datetime,
-    advertiser_id varchar(36) not null,
+    seller_id varchar(36) not null,
     products_classification_id varchar(36) not null,
     primary key (id),
-    foreign key (advertiser_id) references advertisers(id),
-    foreign key (products_classification_id) references advertisers(id)
+    foreign key (seller_id) references sellers(id),
+    foreign key (products_classification_id) references sellers(id)
 );
 
 create table if not exists argosdb.inventory_items (
@@ -69,9 +69,9 @@ create table if not exists argosdb.sales (
     created_at datetime not null,
     updated_at datetime not null,
     total_value decimal(7,2) not null check (total_value > 0.00),
-    customer_id varchar(36) not null,
+    buyer_id varchar(36) not null,
     primary key (id),
-    foreign key (customer_id) references customers(id)
+    foreign key (buyer_id) references buyers(id)
 );
 
 create table if not exists argosdb.sales_items (

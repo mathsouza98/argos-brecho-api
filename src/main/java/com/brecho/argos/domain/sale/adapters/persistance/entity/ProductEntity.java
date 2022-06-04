@@ -31,9 +31,9 @@ public class ProductEntity {
     @Column(name = "updated_at")
     private LocalDate updatedAt;
 
-    @JoinColumn(name = "advertiser_id")
+    @JoinColumn(name = "seller_id")
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserEntity advertiser;
+    private UserEntity seller;
 
     @JoinColumn(name = "product_classification_id")
     @ManyToOne(fetch = FetchType.LAZY)
