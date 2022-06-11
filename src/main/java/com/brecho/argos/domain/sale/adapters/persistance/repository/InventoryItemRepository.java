@@ -7,10 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface InventoryItemRepository extends JpaRepository<InventoryItemEntity, String> {
 
-    @Query("select * from InventoryItemEntity where product_id in :ids and status = 1")
+    @Query("SELECT * FROM InventoryItemEntity WHERE product_id IN (:ids) AND status = 1")
     List<InventoryItemEntity> findAvailableInventoryItemsByProductsIds(@Param("ids") List<String> ids);
 }

@@ -25,6 +25,9 @@ public class InventoryItemEntity {
     @Column(name = "amount")
     private int amount;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

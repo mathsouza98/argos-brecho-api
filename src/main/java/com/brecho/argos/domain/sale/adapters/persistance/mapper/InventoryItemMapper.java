@@ -2,6 +2,7 @@ package com.brecho.argos.domain.sale.adapters.persistance.mapper;
 
 import com.brecho.argos.domain.sale.adapters.persistance.entity.InventoryItemEntity;
 import com.brecho.argos.domain.sale.core.models.InventoryItem;
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 
 import java.util.List;
