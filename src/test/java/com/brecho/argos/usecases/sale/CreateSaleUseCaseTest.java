@@ -1,10 +1,7 @@
 package com.brecho.argos.usecases.sale;
 
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import com.brecho.argos.domain.sale.adapters.persistance.entity.InventoryItemEntity;
 import com.brecho.argos.domain.sale.adapters.persistance.entity.SaleEntity;
-import com.brecho.argos.domain.sale.adapters.persistance.entity.SaleItemEntity;
 import com.brecho.argos.domain.sale.adapters.persistance.mapper.*;
 import com.brecho.argos.domain.sale.adapters.persistance.repository.InventoryItemRepository;
 import com.brecho.argos.domain.sale.adapters.persistance.repository.SaleRepository;
@@ -17,10 +14,7 @@ import com.brecho.argos.factory.SaleFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mapstruct.factory.Mappers;
 import org.mockito.*;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -62,18 +56,14 @@ class CreateSaleUseCaseTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        FixtureFactoryLoader.loadTemplates("com.brecho.argos.factory");
     }
 
     @Test
     @DisplayName("It should create a sale")
     void shouldCreateSale() {
         //given
-        Sale sale = Fixture.from(Sale.class).gimme(SaleFactory.VALID_SALE);
-        List<InventoryItemEntity> availableItems = Fixture.from(InventoryItemEntity.class).gimme(3, SaleEntityFactory.VALID_INVENTORY_ITEM);
-        BigDecimal saleTotalValue = sale.getSaleItems().stream()
-                .map(saleItem -> saleItem.getProduct().getPrice().multiply(BigDecimal.valueOf(saleItem.getAmount())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        Sale sale = SaleFactory.createValidSale();
+        List<InventoryItemEntity> availableItems = SaleEntityFactory.createValidAvailableInventoryItems();
 
         //when
         when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
@@ -82,8 +72,10 @@ class CreateSaleUseCaseTest {
         Sale createdSale = createSaleUseCase.createSale(sale);
 
         assertNotNull(createdSale.getId());
+        assertNotNull(createdSale.getCreatedAt());
+        assertNotNull(createdSale.getUpdatedAt());
         assertEquals(Sale.Status.WAITING_PAYMENT, createdSale.getStatus());
-        assertEquals(createdSale.getTotalValue(), saleTotalValue);
+        assertEquals(BigDecimal.valueOf(136.5), createdSale.getTotalValue());
 
     }
 }

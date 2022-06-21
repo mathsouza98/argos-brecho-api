@@ -1,6 +1,8 @@
 package com.brecho.argos.domain.user.core.models;
 
 import com.brecho.argos.domain.user.core.enums.Role;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +11,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 public class User {
     private String id;
     private String username;

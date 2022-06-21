@@ -1,8 +1,6 @@
 package com.brecho.argos.domain.sale.adapters.persistance.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +12,8 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProductClassificationEntity {
     @Id
     @Column(name = "id", length = 36)

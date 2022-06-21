@@ -1,9 +1,7 @@
 package com.brecho.argos.domain.sale.adapters.persistance.entity;
 
 import com.brecho.argos.domain.user.adapters.persistance.entity.UserEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,6 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProductEntity {
     @Id
     @Column(name = "id", length = 36)
