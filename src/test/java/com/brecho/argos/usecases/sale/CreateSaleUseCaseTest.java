@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -68,14 +69,28 @@ class CreateSaleUseCaseTest {
         //when
         when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
-
         Sale createdSale = createSaleUseCase.createSale(sale);
 
+        //then
         assertNotNull(createdSale.getId());
         assertNotNull(createdSale.getCreatedAt());
         assertNotNull(createdSale.getUpdatedAt());
         assertEquals(Sale.Status.WAITING_PAYMENT, createdSale.getStatus());
         assertEquals(BigDecimal.valueOf(136.5), createdSale.getTotalValue());
+    }
 
+    @Test
+    @DisplayName("It should not create a sale because product is unavailable in inventory")
+    void shouldThrowNotAvailableItemException() {
+        //given
+        Sale sale = SaleFactory.createValidSale();
+        List<InventoryItemEntity> availableItems = new ArrayList<>();
+
+        //when
+        when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        //then
+        assertThrows(RuntimeException.class, () -> createSaleUseCase.createSale(sale));
     }
 }
