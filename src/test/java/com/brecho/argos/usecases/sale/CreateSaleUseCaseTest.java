@@ -80,7 +80,7 @@ class CreateSaleUseCaseTest {
     }
 
     @Test
-    @DisplayName("It should not create a sale because product is unavailable in inventory")
+    @DisplayName("It should not create sale because product is unavailable in inventory")
     void shouldThrowNotAvailableItemException() {
         //given
         Sale sale = SaleFactory.createValidSale();
