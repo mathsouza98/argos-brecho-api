@@ -36,7 +36,7 @@ public class SaleEntityFactory {
                                     .email("pedro@vendedor.com")
                                     .cpf("10289700564")
                                     .birthdate(LocalDate.of(1998, 8, 27))
-                                    .role(Role.SELLER)
+                                    .roles(List.of(Role.SELLER))
                                     .createdAt(LocalDateTime.now())
                                     .updatedAt(LocalDateTime.now())
                                     .build())

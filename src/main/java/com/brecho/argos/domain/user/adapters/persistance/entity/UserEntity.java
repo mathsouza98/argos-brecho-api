@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "addresses")
@@ -39,7 +40,7 @@ public class UserEntity {
 
     @Enumerated
     @Column(name = "role")
-    private Role role;
+    private List<Role> roles;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

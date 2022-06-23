@@ -93,4 +93,34 @@ class CreateSaleUseCaseTest {
         //then
         assertThrows(RuntimeException.class, () -> createSaleUseCase.createSale(sale));
     }
+
+    @Test
+    @DisplayName("It should not create sale because product quantity is insufficient in inventory")
+    void shouldThrowInsufficientQuantityItemException() {
+        //given
+        Sale sale = SaleFactory.createInvalidSaleBySaleItemQuantityBiggerThanAvailableInInventory();
+        List<InventoryItemEntity> availableItems = SaleEntityFactory.createValidAvailableInventoryItems();
+
+        //when
+        when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        //then
+        assertThrows(RuntimeException.class, () -> createSaleUseCase.createSale(sale));
+    }
+
+    @Test
+    @DisplayName("It should not create sale because seller and buyer cannot the same")
+    void shouldThrowBuyerCannotBeSellerException() {
+        //given
+        Sale sale = SaleFactory.createInvalidSaleByBuyerAndSellerBeingTheSame();
+        List<InventoryItemEntity> availableItems = SaleEntityFactory.createValidAvailableInventoryItems();
+
+        //when
+        when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        //then
+        assertThrows(RuntimeException.class, () -> createSaleUseCase.createSale(sale));
+    }
 }
