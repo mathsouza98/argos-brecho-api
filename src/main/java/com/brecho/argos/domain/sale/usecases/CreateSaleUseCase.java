@@ -4,6 +4,10 @@ import com.brecho.argos.domain.sale.adapters.persistance.mapper.InventoryItemMap
 import com.brecho.argos.domain.sale.adapters.persistance.mapper.SaleMapper;
 import com.brecho.argos.domain.sale.adapters.persistance.repository.InventoryItemRepository;
 import com.brecho.argos.domain.sale.adapters.persistance.repository.SaleRepository;
+import com.brecho.argos.domain.sale.core.exceptions.BuyerCannotBeSellerException;
+import com.brecho.argos.domain.sale.core.exceptions.InsufficientQuantityItemException;
+import com.brecho.argos.domain.sale.core.exceptions.InvalidSaleException;
+import com.brecho.argos.domain.sale.core.exceptions.UnavailableItemException;
 import com.brecho.argos.domain.sale.core.models.InventoryItem;
 import com.brecho.argos.domain.sale.core.models.Sale;
 import com.brecho.argos.domain.sale.core.models.SaleItem;
@@ -21,7 +25,6 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-//TODO: Enhance exception using dedicated ones
 public class CreateSaleUseCase {
     private final SaleRepository saleRepository;
     private final InventoryItemRepository inventoryItemRepository;
@@ -35,17 +38,21 @@ public class CreateSaleUseCase {
         Map<String, InventoryItem> availableInventoryItems = inventoryItemMapper.toDomainList(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(productsIds))
                 .stream().collect(Collectors.toMap(item -> item.getProduct().getId(), Function.identity()));
 
-        for (SaleItem saleItem : saleItems) {
-            String saleItemProductKey = saleItem.getProduct().getId();
+        try {
+            for (SaleItem saleItem : saleItems) {
+                String saleItemProductKey = saleItem.getProduct().getId();
 
-            if (availableInventoryItems.containsKey(saleItemProductKey)) {
-                InventoryItem inventoryItem = availableInventoryItems.get(saleItemProductKey);
-                checkIfSaleItemAmountISAvailableInInventory(saleItem, inventoryItem);
-                saleTotalValue = saleTotalValue.add(saleItem.getProduct().getPrice().multiply(BigDecimal.valueOf(saleItem.getAmount())));
-                checkIfBuyerAndSellerAreNotTheSame(sale.getBuyer(), saleItem.getProduct().getSeller());
-            } else {
-                throw new RuntimeException("Produto indisponível em estoque, Product={%s}".formatted(saleItem.getProduct()));
+                if (availableInventoryItems.containsKey(saleItemProductKey)) {
+                    InventoryItem inventoryItem = availableInventoryItems.get(saleItemProductKey);
+                    checkIfSaleItemAmountISAvailableInInventory(saleItem, inventoryItem);
+                    saleTotalValue = saleTotalValue.add(inventoryItem.getProduct().getPrice().multiply(BigDecimal.valueOf(saleItem.getAmount())));
+                    checkIfBuyerAndSellerAreNotTheSame(sale.getBuyer(), saleItem.getProduct().getSeller());
+                } else {
+                    throw new UnavailableItemException(saleItem.getProduct());
+                }
             }
+        } catch (InsufficientQuantityItemException | BuyerCannotBeSellerException | UnavailableItemException e) {
+            throw new InvalidSaleException(e);
         }
 
         sale.setCreatedAt(LocalDateTime.now());
@@ -56,13 +63,13 @@ public class CreateSaleUseCase {
         return saleMapper.toDomain(saleRepository.save(saleMapper.toEntity(sale)));
     }
 
-    private void checkIfBuyerAndSellerAreNotTheSame(User buyer, User seller) throws RuntimeException {
+    private void checkIfBuyerAndSellerAreNotTheSame(User buyer, User seller) throws BuyerCannotBeSellerException {
         if (Objects.equals(buyer.getId(), seller.getId()))
-            throw new RuntimeException("Usuário não pode comprar um produto que ele mesmo anúnciou");
+            throw new BuyerCannotBeSellerException();
     }
 
-    private void checkIfSaleItemAmountISAvailableInInventory(SaleItem saleItem, InventoryItem inventoryItem) throws RuntimeException {
+    private void checkIfSaleItemAmountISAvailableInInventory(SaleItem saleItem, InventoryItem inventoryItem) throws InsufficientQuantityItemException {
         if (saleItem.getAmount() > inventoryItem.getAmount())
-            throw new RuntimeException("Quantidade não disponível em estoque para o item {%s}".formatted(saleItem));
+            throw new InsufficientQuantityItemException(saleItem);
     }
 }
