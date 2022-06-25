@@ -12,5 +12,5 @@ import java.util.List;
 public interface InventoryItemRepository extends JpaRepository<InventoryItemEntity, String> {
 
     @Query("SELECT * FROM InventoryItemEntity WHERE product_id IN (:ids) AND status = 1")
-    List<InventoryItemEntity> findAvailableInventoryItemsByProductsIds(@Param("ids") List<String> ids);
+    List<InventoryItemEntity> getAvailableInventoryItemsByProductsIds(@Param("ids") List<String> ids);
 }

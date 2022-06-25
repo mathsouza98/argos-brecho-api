@@ -68,7 +68,7 @@ class CreateSaleUseCaseTest {
         List<InventoryItemEntity> availableItems = SaleEntityFactory.createValidAvailableInventoryItems();
 
         //when
-        when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(inventoryItemRepository.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
         Sale createdSale = createSaleUseCase.createSale(sale);
 
@@ -88,7 +88,7 @@ class CreateSaleUseCaseTest {
         List<InventoryItemEntity> availableItems = new ArrayList<>();
 
         //when
-        when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(inventoryItemRepository.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
 
         //then
@@ -103,7 +103,7 @@ class CreateSaleUseCaseTest {
         List<InventoryItemEntity> availableItems = SaleEntityFactory.createValidAvailableInventoryItems();
 
         //when
-        when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(inventoryItemRepository.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
 
         //then
@@ -118,7 +118,7 @@ class CreateSaleUseCaseTest {
         List<InventoryItemEntity> availableItems = SaleEntityFactory.createValidAvailableInventoryItems();
 
         //when
-        when(inventoryItemRepository.findAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(inventoryItemRepository.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(saleRepository.save(any(SaleEntity.class))).thenAnswer(i -> i.getArguments()[0]);
 
         //then
