@@ -42,14 +42,13 @@ public class CreateSaleUseCase {
             for (SaleItem saleItem : saleItems) {
                 String saleItemProductKey = saleItem.getProduct().getId();
 
-                if (availableInventoryItems.containsKey(saleItemProductKey)) {
-                    InventoryItem inventoryItem = availableInventoryItems.get(saleItemProductKey);
-                    checkIfSaleItemAmountISAvailableInInventory(saleItem, inventoryItem);
-                    saleTotalValue = saleTotalValue.add(inventoryItem.getProduct().getPrice().multiply(BigDecimal.valueOf(saleItem.getAmount())));
-                    checkIfBuyerAndSellerAreNotTheSame(sale.getBuyer(), saleItem.getProduct().getSeller());
-                } else {
+                if (!availableInventoryItems.containsKey(saleItemProductKey))
                     throw new UnavailableItemException(saleItem.getProduct());
-                }
+
+                InventoryItem inventoryItem = availableInventoryItems.get(saleItemProductKey);
+                checkIfSaleItemAmountISAvailableInInventory(saleItem, inventoryItem);
+                saleTotalValue = saleTotalValue.add(inventoryItem.getProduct().getPrice().multiply(BigDecimal.valueOf(saleItem.getAmount())));
+                checkIfBuyerAndSellerAreNotTheSame(sale.getBuyer(), saleItem.getProduct().getSeller());
             }
         } catch (InsufficientQuantityItemException | BuyerCannotBeSellerException | UnavailableItemException e) {
             throw new InvalidSaleException(e);
