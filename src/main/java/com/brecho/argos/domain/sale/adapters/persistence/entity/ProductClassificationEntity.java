@@ -12,8 +12,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class ProductClassificationEntity {
     @Id
     @Column(name = "id", length = 36)

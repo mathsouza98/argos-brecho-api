@@ -9,8 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class SaleItemEntity {
     @Id
     @Column(name = "id", length = 36)

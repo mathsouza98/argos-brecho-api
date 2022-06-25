@@ -13,8 +13,6 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class UserEntity {
     @Id
     @Column(name = "id", length = 36)
