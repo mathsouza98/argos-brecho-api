@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.sale.adapters.persistance.mapper;
+package com.brecho.argos.domain.sale.adapters.persistence.mapper;
 
-import com.brecho.argos.domain.sale.adapters.persistance.entity.ProductClassificationEntity;
+import com.brecho.argos.domain.sale.adapters.persistence.entity.ProductClassificationEntity;
 import com.brecho.argos.domain.sale.core.models.ProductClassification;
 import org.mapstruct.Mapper;
 

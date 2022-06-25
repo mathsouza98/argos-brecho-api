@@ -1,4 +1,4 @@
-package com.brecho.argos.domain.sale.adapters.persistance.entity;
+package com.brecho.argos.domain.sale.adapters.persistence.entity;
 
 import com.brecho.argos.domain.sale.core.enums.InventoryItemStatus;
 import lombok.*;

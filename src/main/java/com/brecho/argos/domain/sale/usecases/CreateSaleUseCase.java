@@ -1,9 +1,9 @@
 package com.brecho.argos.domain.sale.usecases;
 
-import com.brecho.argos.domain.sale.adapters.persistance.mapper.InventoryItemMapper;
-import com.brecho.argos.domain.sale.adapters.persistance.mapper.SaleMapper;
-import com.brecho.argos.domain.sale.adapters.persistance.repository.InventoryItemRepository;
-import com.brecho.argos.domain.sale.adapters.persistance.repository.SaleRepository;
+import com.brecho.argos.domain.sale.adapters.persistence.mapper.InventoryItemMapper;
+import com.brecho.argos.domain.sale.adapters.persistence.mapper.SaleMapper;
+import com.brecho.argos.domain.sale.adapters.persistence.repository.InventoryItemRepository;
+import com.brecho.argos.domain.sale.adapters.persistence.repository.SaleRepository;
 import com.brecho.argos.domain.sale.core.exceptions.BuyerCannotBeSellerException;
 import com.brecho.argos.domain.sale.core.exceptions.InsufficientQuantityItemException;
 import com.brecho.argos.domain.sale.core.exceptions.InvalidSaleException;

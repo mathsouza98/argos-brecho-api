@@ -1,10 +1,10 @@
 package com.brecho.argos.usecases.sale;
 
-import com.brecho.argos.domain.sale.adapters.persistance.entity.InventoryItemEntity;
-import com.brecho.argos.domain.sale.adapters.persistance.entity.SaleEntity;
-import com.brecho.argos.domain.sale.adapters.persistance.mapper.*;
-import com.brecho.argos.domain.sale.adapters.persistance.repository.InventoryItemRepository;
-import com.brecho.argos.domain.sale.adapters.persistance.repository.SaleRepository;
+import com.brecho.argos.domain.sale.adapters.persistence.entity.InventoryItemEntity;
+import com.brecho.argos.domain.sale.adapters.persistence.entity.SaleEntity;
+import com.brecho.argos.domain.sale.adapters.persistence.mapper.*;
+import com.brecho.argos.domain.sale.adapters.persistence.repository.InventoryItemRepository;
+import com.brecho.argos.domain.sale.adapters.persistence.repository.SaleRepository;
 import com.brecho.argos.domain.sale.core.exceptions.InvalidSaleException;
 import com.brecho.argos.domain.sale.core.models.Sale;
 import com.brecho.argos.domain.sale.usecases.CreateSaleUseCase;

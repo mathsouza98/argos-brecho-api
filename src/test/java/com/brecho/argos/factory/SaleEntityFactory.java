@@ -1,6 +1,6 @@
 package com.brecho.argos.factory;
 
-import com.brecho.argos.domain.sale.adapters.persistance.entity.*;
+import com.brecho.argos.domain.sale.adapters.persistence.entity.*;
 import com.brecho.argos.domain.sale.core.enums.InventoryItemStatus;
 import com.brecho.argos.domain.user.adapters.persistance.entity.UserEntity;
 import com.brecho.argos.domain.user.core.enums.Role;
