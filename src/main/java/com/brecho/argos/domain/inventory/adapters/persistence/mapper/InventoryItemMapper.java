@@ -1,7 +1,8 @@
-package com.brecho.argos.domain.sale.adapters.persistence.mapper;
+package com.brecho.argos.domain.inventory.adapters.persistence.mapper;
 
-import com.brecho.argos.domain.sale.adapters.persistence.entity.InventoryItemEntity;
-import com.brecho.argos.domain.sale.core.models.InventoryItem;
+import com.brecho.argos.domain.inventory.adapters.persistence.entity.InventoryItemEntity;
+import com.brecho.argos.domain.inventory.core.models.InventoryItem;
+import com.brecho.argos.domain.sale.adapters.persistence.mapper.ProductMapper;
 import org.mapstruct.Mapper;
 
 import java.util.List;

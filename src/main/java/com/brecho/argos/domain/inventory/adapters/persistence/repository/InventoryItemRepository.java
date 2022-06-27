@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.sale.adapters.persistence.repository;
+package com.brecho.argos.domain.inventory.adapters.persistence.repository;
 
-import com.brecho.argos.domain.sale.adapters.persistence.entity.InventoryItemEntity;
+import com.brecho.argos.domain.inventory.adapters.persistence.entity.InventoryItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

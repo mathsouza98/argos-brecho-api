@@ -1,9 +1,9 @@
 package com.brecho.argos.domain.sale.core.exceptions;
 
-import com.brecho.argos.domain.sale.core.models.Product;
+import java.util.List;
 
 public class UnavailableItemException extends RuntimeException {
-    public UnavailableItemException(Product product) {
-        super("Produto indisponível em estoque, Product={%s}".formatted(product));
+    public UnavailableItemException(List<String> productIds) {
+        super("Produto indisponível em estoque, Products={%s}".formatted(productIds));
     }
 }

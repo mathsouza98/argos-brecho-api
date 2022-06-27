@@ -1,10 +1,11 @@
 package com.brecho.argos.usecases.sale;
 
+import com.brecho.argos.domain.inventory.usecases.GetInventoryItemUseCase;
 import com.brecho.argos.domain.sale.core.exceptions.InvalidSaleException;
-import com.brecho.argos.domain.sale.core.models.InventoryItem;
+import com.brecho.argos.domain.inventory.core.models.InventoryItem;
+import com.brecho.argos.domain.sale.core.exceptions.UnavailableItemException;
 import com.brecho.argos.domain.sale.core.models.Sale;
 import com.brecho.argos.domain.sale.core.ports.CreateSalePort;
-import com.brecho.argos.domain.sale.core.ports.GetInventoryItemPort;
 import com.brecho.argos.domain.sale.usecases.CreateSaleUseCase;
 import com.brecho.argos.factory.InventoryItemFactory;
 import com.brecho.argos.factory.SaleFactory;
@@ -14,8 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -30,7 +30,7 @@ class CreateSaleUseCaseTest {
     private CreateSalePort createSalePort;
 
     @Mock
-    private GetInventoryItemPort getInventoryItemPort;
+    private GetInventoryItemUseCase getInventoryItemUseCase;
 
     @BeforeEach
     public void setup() {
@@ -42,10 +42,10 @@ class CreateSaleUseCaseTest {
     void shouldCreateSale() {
         //given
         Sale sale = SaleFactory.createValidSale();
-        List<InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
+        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
 
         //when
-        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(createSalePort.create(any(Sale.class))).thenAnswer(i -> i.getArguments()[0]);
         Sale createdSale = createSaleUseCase.createSale(sale);
 
@@ -62,10 +62,9 @@ class CreateSaleUseCaseTest {
     void shouldThrowUnavailableItemException() {
         //given
         Sale sale = SaleFactory.createValidSale();
-        List<InventoryItem> availableItems = new ArrayList<>();
 
         //when
-        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenThrow(UnavailableItemException.class);
         when(createSalePort.create(any(Sale.class))).thenAnswer(i -> i.getArguments()[0]);
 
         //then
@@ -77,10 +76,10 @@ class CreateSaleUseCaseTest {
     void shouldThrowInsufficientQuantityItemException() {
         //given
         Sale sale = SaleFactory.createInvalidSaleBySaleItemQuantityBiggerThanAvailableInInventory();
-        List<InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
+        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
 
         //when
-        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(createSalePort.create(any(Sale.class))).thenAnswer(i -> i.getArguments()[0]);
 
         //then
@@ -92,10 +91,10 @@ class CreateSaleUseCaseTest {
     void shouldThrowBuyerCannotBeSellerException() {
         //given
         Sale sale = SaleFactory.createInvalidSaleByBuyerAndSellerBeingTheSame();
-        List<InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
+        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
 
         //when
-        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(createSalePort.create(any(Sale.class))).thenAnswer(i -> i.getArguments()[0]);
 
         //then

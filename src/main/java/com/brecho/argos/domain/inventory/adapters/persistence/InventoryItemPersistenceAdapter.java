@@ -1,9 +1,9 @@
-package com.brecho.argos.domain.sale.adapters.persistence;
+package com.brecho.argos.domain.inventory.adapters.persistence;
 
-import com.brecho.argos.domain.sale.adapters.persistence.mapper.InventoryItemMapper;
-import com.brecho.argos.domain.sale.adapters.persistence.repository.InventoryItemRepository;
-import com.brecho.argos.domain.sale.core.models.InventoryItem;
-import com.brecho.argos.domain.sale.core.ports.GetInventoryItemPort;
+import com.brecho.argos.domain.inventory.adapters.persistence.mapper.InventoryItemMapper;
+import com.brecho.argos.domain.inventory.adapters.persistence.repository.InventoryItemRepository;
+import com.brecho.argos.domain.inventory.core.models.InventoryItem;
+import com.brecho.argos.domain.inventory.core.ports.GetInventoryItemPort;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;

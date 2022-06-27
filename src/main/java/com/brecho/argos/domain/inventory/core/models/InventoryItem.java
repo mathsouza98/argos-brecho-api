@@ -1,6 +1,7 @@
-package com.brecho.argos.domain.sale.core.models;
+package com.brecho.argos.domain.inventory.core.models;
 
 import com.brecho.argos.domain.sale.core.enums.InventoryItemStatus;
+import com.brecho.argos.domain.sale.core.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

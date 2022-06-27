@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.sale.core.ports;
+package com.brecho.argos.domain.inventory.core.ports;
 
-import com.brecho.argos.domain.sale.core.models.InventoryItem;
+import com.brecho.argos.domain.inventory.core.models.InventoryItem;
 
 import java.util.List;
 
