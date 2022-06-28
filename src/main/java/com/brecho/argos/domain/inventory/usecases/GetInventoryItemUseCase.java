@@ -15,6 +15,8 @@ public class GetInventoryItemUseCase {
     private final GetInventoryItemPort getInventoryItemPort;
 
     public Map<String, InventoryItem> getAvailableInventoryItemsByProductsIds(List<String> productIds) throws UnavailableItemException {
+        if (productIds.isEmpty()) throw new RuntimeException("Bad Request");
+
         Map<String, InventoryItem> availableInventoryItems = getInventoryItemPort.getAvailableInventoryItemsByProductsIds(productIds)
                 .stream().collect(Collectors.toMap(item -> item.getProduct().getId(), Function.identity()));
         List<String> unavailableItems = productIds.stream().filter(id -> !availableInventoryItems.containsKey(id)).toList();

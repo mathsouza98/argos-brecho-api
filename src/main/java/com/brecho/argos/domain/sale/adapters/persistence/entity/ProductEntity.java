@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProductEntity {
     @Id
     @Column(name = "id", length = 36)

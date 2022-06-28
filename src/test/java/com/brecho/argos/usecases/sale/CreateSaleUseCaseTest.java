@@ -42,7 +42,7 @@ class CreateSaleUseCaseTest {
     void shouldCreateSale() {
         //given
         Sale sale = SaleFactory.createValidSale();
-        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
+        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItemsMap();
 
         //when
         when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
@@ -76,7 +76,7 @@ class CreateSaleUseCaseTest {
     void shouldThrowInsufficientQuantityItemException() {
         //given
         Sale sale = SaleFactory.createInvalidSaleBySaleItemQuantityBiggerThanAvailableInInventory();
-        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
+        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItemsMap();
 
         //when
         when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
@@ -91,7 +91,7 @@ class CreateSaleUseCaseTest {
     void shouldThrowBuyerCannotBeSellerException() {
         //given
         Sale sale = SaleFactory.createInvalidSaleByBuyerAndSellerBeingTheSame();
-        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItems();
+        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItemsMap();
 
         //when
         when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);

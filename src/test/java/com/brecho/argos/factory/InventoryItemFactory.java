@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 public class InventoryItemFactory {
-    public static Map<String, InventoryItem> createValidAvailableInventoryItems() {
+    public static Map<String, InventoryItem> createValidAvailableInventoryItemsMap() {
         InventoryItem inventoryItem = InventoryItem
                 .builder()
                 .id("712b595f-b83f-43a7-8858-90d7f6f54aca")
@@ -36,23 +36,62 @@ public class InventoryItemFactory {
                                 .username("pvendedor")
                                 .password("123")
                                 .name("Pedro vendedor")
-                                    .email("pedro@vendedor.com")
-                                    .cpf("10289700564")
-                                    .birthdate(LocalDate.of(1998, 8, 27))
-                                    .roles(List.of(Role.SELLER))
-                                    .createdAt(LocalDateTime.now())
-                                    .updatedAt(LocalDateTime.now())
-                                    .build())
-                            .productClassification(ProductClassification
-                                    .builder()
-                                    .id("67a62ced-1846-45f6-bdd4-2d46c0685066")
-                                    .value("Facas")
-                                    .build())
-                            .build())
-                        .build();
+                                .email("pedro@vendedor.com")
+                                .cpf("10289700564")
+                                .birthdate(LocalDate.of(1998, 8, 27))
+                                .roles(List.of(Role.SELLER))
+                                .createdAt(LocalDateTime.now())
+                                .updatedAt(LocalDateTime.now())
+                                .build())
+                        .productClassification(ProductClassification
+                                .builder()
+                                .id("67a62ced-1846-45f6-bdd4-2d46c0685066")
+                                .value("Facas")
+                                .build())
+                        .build())
+                .build();
 
         return new HashMap<>() {{
             put("525643da-9e92-497e-b624-6e34becef20a", inventoryItem);
         }};
+    }
+
+    public static List<InventoryItem> createValidAvailableInventoryItemsList() {
+        return List.of(
+                InventoryItem
+                        .builder()
+                        .id("712b595f-b83f-43a7-8858-90d7f6f54aca")
+                        .status(InventoryItemStatus.AVAILABLE)
+                        .amount(33)
+                        .createdAt(LocalDateTime.now())
+                        .updatedAt(LocalDateTime.now())
+                        .product(Product
+                                .builder()
+                                .id("525643da-9e92-497e-b624-6e34becef20a")
+                                .name("Faca Tramontina")
+                                .price(BigDecimal.valueOf(45.5))
+                                .createdAt(LocalDateTime.now())
+                                .updatedAt(LocalDateTime.now())
+                                .seller(User
+                                        .builder()
+                                        .id("92dd6b47-3761-4657-927d-676c7d8b7146")
+                                        .username("pvendedor")
+                                        .password("123")
+                                        .name("Pedro vendedor")
+                                        .email("pedro@vendedor.com")
+                                        .cpf("10289700564")
+                                        .birthdate(LocalDate.of(1998, 8, 27))
+                                        .roles(List.of(Role.SELLER))
+                                        .createdAt(LocalDateTime.now())
+                                        .updatedAt(LocalDateTime.now())
+                                        .build())
+                                .productClassification(ProductClassification
+                                        .builder()
+                                        .id("67a62ced-1846-45f6-bdd4-2d46c0685066")
+                                        .value("Facas")
+                                        .build())
+                                .build())
+                        .build()
+        );
     }
 }
