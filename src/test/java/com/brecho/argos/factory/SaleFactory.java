@@ -164,4 +164,8 @@ public class SaleFactory {
                         .build()))
                 .build();
     }
+
+    public static List<String> createUnavailableProductIds() {
+        return List.of("c7c611f2-e296-4c3b-be5e-96158ce1e467", "eaaadb44-2ffc-4a4e-91ed-77657eaa33da");
+    }
 }

@@ -1,10 +1,7 @@
 package com.brecho.argos.domain.sale.usecases;
 
 import com.brecho.argos.domain.inventory.usecases.GetInventoryItemUseCase;
-import com.brecho.argos.domain.sale.core.exceptions.BuyerCannotBeSellerException;
-import com.brecho.argos.domain.sale.core.exceptions.InsufficientQuantityItemException;
-import com.brecho.argos.domain.sale.core.exceptions.InvalidSaleException;
-import com.brecho.argos.domain.sale.core.exceptions.UnavailableItemException;
+import com.brecho.argos.domain.sale.core.exceptions.*;
 import com.brecho.argos.domain.inventory.core.models.InventoryItem;
 import com.brecho.argos.domain.sale.core.models.Sale;
 import com.brecho.argos.domain.sale.core.models.SaleItem;
@@ -40,7 +37,8 @@ public class CreateSaleUseCase {
                 saleTotalValue = saleTotalValue.add(inventoryItem.getProduct().getPrice().multiply(BigDecimal.valueOf(saleItem.getAmount())));
                 checkIfBuyerAndSellerAreNotTheSame(sale.getBuyer(), saleItem.getProduct().getSeller());
             }
-        } catch (InsufficientQuantityItemException | BuyerCannotBeSellerException | UnavailableItemException e) {
+        } catch (InsufficientQuantityItemException | BuyerCannotBeSellerException | UnavailableItemException |
+                 EmptyArgumentsException e) {
             throw new InvalidSaleException(e);
         }
 

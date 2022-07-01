@@ -3,8 +3,11 @@ package com.brecho.argos.usecases.inventory;
 import com.brecho.argos.domain.inventory.core.models.InventoryItem;
 import com.brecho.argos.domain.inventory.core.ports.GetInventoryItemPort;
 import com.brecho.argos.domain.inventory.usecases.GetInventoryItemUseCase;
+import com.brecho.argos.domain.sale.core.exceptions.EmptyArgumentsException;
+import com.brecho.argos.domain.sale.core.exceptions.InvalidSaleException;
 import com.brecho.argos.domain.sale.core.exceptions.UnavailableItemException;
 import com.brecho.argos.factory.InventoryItemFactory;
+import com.brecho.argos.factory.SaleFactory;
 import com.brecho.argos.factory.entity.InventoryItemEntityFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -39,7 +42,7 @@ class GetInventoryItemUseCaseTest {
         List<String> productIds = InventoryItemEntityFactory.createValidProductIds();
 
         //when
-        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenAnswer(i -> availableItems);
+        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         Map<String, InventoryItem> availableItemsMap = getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(productIds);
 
         //then
@@ -55,9 +58,23 @@ class GetInventoryItemUseCaseTest {
         List<String> productIds = new ArrayList<>();
 
         //when
-        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenAnswer(i -> availableItems);
+        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
 
         //then
-        assertThrows(RuntimeException.class, () -> getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(productIds));
+        assertThrows(EmptyArgumentsException.class, () -> getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(productIds));
+    }
+
+    @Test
+    @DisplayName("It should not get available inventory items because items are unavailable")
+    void shouldNotGetAvailableInventoryItemsBecauseTheyAreUnavailable() {
+        //given
+        List<InventoryItem> availableItems = new ArrayList<>();
+        List<String> productIds = SaleFactory.createUnavailableProductIds();
+
+        //when
+        when(getInventoryItemPort.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+
+        //then
+        assertThrows(UnavailableItemException.class, () -> getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(productIds));
     }
 }
