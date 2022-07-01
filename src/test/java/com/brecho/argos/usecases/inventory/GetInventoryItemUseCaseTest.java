@@ -4,7 +4,6 @@ import com.brecho.argos.domain.inventory.core.models.InventoryItem;
 import com.brecho.argos.domain.inventory.core.ports.GetInventoryItemPort;
 import com.brecho.argos.domain.inventory.usecases.GetInventoryItemUseCase;
 import com.brecho.argos.domain.sale.core.exceptions.EmptyArgumentsException;
-import com.brecho.argos.domain.sale.core.exceptions.InvalidSaleException;
 import com.brecho.argos.domain.sale.core.exceptions.UnavailableItemException;
 import com.brecho.argos.factory.InventoryItemFactory;
 import com.brecho.argos.factory.SaleFactory;
