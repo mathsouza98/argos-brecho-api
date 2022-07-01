@@ -6,7 +6,9 @@ import com.brecho.argos.domain.inventory.core.models.InventoryItem;
 import com.brecho.argos.domain.sale.core.models.Sale;
 import com.brecho.argos.domain.sale.core.models.SaleItem;
 import com.brecho.argos.domain.sale.core.ports.CreateSalePort;
+import com.brecho.argos.domain.user.core.UserNotFoundException;
 import com.brecho.argos.domain.user.core.models.User;
+import com.brecho.argos.domain.user.core.ports.GetUserPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class CreateSaleUseCase {
     private final CreateSalePort createSalePort;
+    private final GetUserPort getUserPort;
     private final GetInventoryItemUseCase getInventoryItemUseCase;
 
     public Sale createSale(Sale sale) {
@@ -28,6 +31,7 @@ public class CreateSaleUseCase {
         List<String> productsIds = saleItems.stream().map(saleItem -> saleItem.getProduct().getId()).toList();
 
         try {
+            if (!getUserPort.userExists(sale.getBuyer())) throw new UserNotFoundException(sale.getBuyer());
             Map<String, InventoryItem> availableInventoryItems = getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(productsIds);
 
             for (SaleItem saleItem : saleItems) {
@@ -38,7 +42,7 @@ public class CreateSaleUseCase {
                 checkIfBuyerAndSellerAreNotTheSame(sale.getBuyer(), saleItem.getProduct().getSeller());
             }
         } catch (InsufficientQuantityItemException | BuyerCannotBeSellerException | UnavailableItemException |
-                 EmptyArgumentsException e) {
+                 EmptyArgumentsException | UserNotFoundException e) {
             throw new InvalidSaleException(e);
         }
 

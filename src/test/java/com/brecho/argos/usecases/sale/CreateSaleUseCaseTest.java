@@ -7,6 +7,7 @@ import com.brecho.argos.domain.sale.core.exceptions.UnavailableItemException;
 import com.brecho.argos.domain.sale.core.models.Sale;
 import com.brecho.argos.domain.sale.core.ports.CreateSalePort;
 import com.brecho.argos.domain.sale.usecases.CreateSaleUseCase;
+import com.brecho.argos.domain.user.core.ports.GetUserPort;
 import com.brecho.argos.factory.InventoryItemFactory;
 import com.brecho.argos.factory.SaleFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +29,9 @@ class CreateSaleUseCaseTest {
 
     @Mock
     private CreateSalePort createSalePort;
+
+    @Mock
+    private GetUserPort getUserPort;
 
     @Mock
     private GetInventoryItemUseCase getInventoryItemUseCase;
@@ -94,6 +98,22 @@ class CreateSaleUseCaseTest {
         Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItemsMap();
 
         //when
+        when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
+        when(createSalePort.create(any(Sale.class))).thenAnswer(i -> i.getArguments()[0]);
+
+        //then
+        assertThrows(InvalidSaleException.class, () -> createSaleUseCase.createSale(sale));
+    }
+
+    @Test
+    @DisplayName("It should not create sale because buyer is not registered")
+    void shouldNotCreateSaleBecauseBuyerIsNotRegistered() {
+        //given
+        Sale sale = SaleFactory.createInvalidSaleBecauseBuyerIsNotRegistered();
+        Map<String, InventoryItem> availableItems = InventoryItemFactory.createValidAvailableInventoryItemsMap();
+
+        //when
+        when(getUserPort.userExists(any())).thenReturn(false);
         when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
         when(createSalePort.create(any(Sale.class))).thenAnswer(i -> i.getArguments()[0]);
 
