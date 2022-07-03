@@ -6,8 +6,8 @@ import com.brecho.argos.domain.sale.core.models.Sale;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper
-public interface SaleMapper {
+@Mapper(componentModel = "spring")
+public interface SaleApiMapper {
 
     @Mapping(source = "createdBy", target = "buyer.id")
     Sale fromRequest(SaleRequest saleRequest, String createdBy);
