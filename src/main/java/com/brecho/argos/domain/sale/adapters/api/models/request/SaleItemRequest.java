@@ -1,15 +1,13 @@
 package com.brecho.argos.domain.sale.adapters.api.models.request;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class SaleItemRequest {
     @NotNull(message = "Id do produto à ser comprado não pode ser nulo")

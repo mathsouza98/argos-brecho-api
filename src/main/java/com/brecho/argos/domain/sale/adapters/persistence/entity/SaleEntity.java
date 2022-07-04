@@ -1,7 +1,7 @@
 package com.brecho.argos.domain.sale.adapters.persistence.entity;
 
 import com.brecho.argos.domain.sale.core.models.Sale;
-import com.brecho.argos.domain.user.adapters.persistance.entity.UserEntity;
+import com.brecho.argos.domain.user.adapters.persistence.entity.UserEntity;
 import lombok.*;
 
 import javax.persistence.*;

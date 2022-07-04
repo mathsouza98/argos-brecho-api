@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "products_classification")
+@Table(name = "product_classifications")
 @Getter
 @Setter
 @NoArgsConstructor

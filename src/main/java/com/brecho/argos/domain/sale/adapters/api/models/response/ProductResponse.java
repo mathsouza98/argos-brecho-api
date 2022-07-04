@@ -1,6 +1,6 @@
 package com.brecho.argos.domain.sale.adapters.api.models.response;
 
-import com.brecho.argos.domain.sale.core.models.Sale;
+import com.brecho.argos.domain.sale.core.models.ProductClassification;
 import com.brecho.argos.domain.user.adapters.api.models.response.UserResponse;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,17 +8,16 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
 @Builder
-public class SaleResponse {
+public class ProductResponse {
     private String id;
-    private Sale.Status status;
+    private String name;
+    private BigDecimal price;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private BigDecimal totalValue;
-    private UserResponse buyer;
-    private List<SaleItemResponse> saleItems;
+    private UserResponse seller;
+    private ProductClassification productClassification;
 }

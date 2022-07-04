@@ -1,10 +1,11 @@
-package com.brecho.argos.factory.entity;
+package com.brecho.argos.factory.api.response;
 
-import com.brecho.argos.domain.inventory.adapters.persistence.entity.InventoryItemEntity;
-import com.brecho.argos.domain.sale.adapters.persistence.entity.ProductClassificationEntity;
-import com.brecho.argos.domain.sale.adapters.persistence.entity.ProductEntity;
-import com.brecho.argos.domain.sale.core.enums.InventoryItemStatus;
-import com.brecho.argos.domain.user.adapters.persistence.entity.UserEntity;
+import com.brecho.argos.domain.sale.adapters.api.models.response.ProductResponse;
+import com.brecho.argos.domain.sale.adapters.api.models.response.SaleItemResponse;
+import com.brecho.argos.domain.sale.adapters.api.models.response.SaleResponse;
+import com.brecho.argos.domain.sale.core.models.ProductClassification;
+import com.brecho.argos.domain.sale.core.models.Sale;
+import com.brecho.argos.domain.user.adapters.api.models.response.UserResponse;
 import com.brecho.argos.domain.user.core.enums.Role;
 
 import java.math.BigDecimal;
@@ -12,24 +13,38 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class InventoryItemEntityFactory {
-    public static List<InventoryItemEntity> createValidAvailableInventoryItems() {
-        return List.of(
-                InventoryItemEntity
+public class SaleResponseFactory {
+    public static SaleResponse createValidSaleResponse() {
+        return SaleResponse
+                .builder()
+                .id("45ab68b5-42c0-49bc-9868-ea34258a89dd")
+                .status(Sale.Status.WAITING_PAYMENT)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .totalValue(BigDecimal.valueOf(45.5))
+                .buyer(UserResponse
                         .builder()
-                        .id("712b595f-b83f-43a7-8858-90d7f6f54aca")
-                        .status(InventoryItemStatus.AVAILABLE)
-                        .amount(33)
+                        .username("alijesus")
+                        .password("pass123")
+                        .name("Alisson Jesus")
+                        .email("alisson@jesus.com")
+                        .cpf("34252287600")
+                        .birthdate(LocalDate.of(1997, 3, 24))
+                        .roles(List.of(Role.BUYER))
                         .createdAt(LocalDateTime.now())
                         .updatedAt(LocalDateTime.now())
-                        .product(ProductEntity
+                        .build())
+                .saleItems(List.of(SaleItemResponse
+                        .builder()
+                        .id("66fa9a5d-f131-4d68-a490-b769905ad9ad")
+                        .product(ProductResponse
                                 .builder()
                                 .id("525643da-9e92-497e-b624-6e34becef20a")
                                 .name("Faca Tramontina")
                                 .price(BigDecimal.valueOf(45.5))
                                 .createdAt(LocalDateTime.now())
                                 .updatedAt(LocalDateTime.now())
-                                .seller(UserEntity
+                                .seller(UserResponse
                                         .builder()
                                         .id("92dd6b47-3761-4657-927d-676c7d8b7146")
                                         .username("pvendedor")
@@ -42,17 +57,14 @@ public class InventoryItemEntityFactory {
                                         .createdAt(LocalDateTime.now())
                                         .updatedAt(LocalDateTime.now())
                                         .build())
-                                .productClassification(ProductClassificationEntity
+                                .productClassification(ProductClassification
                                         .builder()
                                         .id("67a62ced-1846-45f6-bdd4-2d46c0685066")
                                         .value("Facas")
                                         .build())
                                 .build())
-                        .build()
-        );
-    }
-
-    public static List<String> createValidProductIds() {
-        return List.of("525643da-9e92-497e-b624-6e34becef20a");
+                        .amount(3)
+                        .build()))
+                .build();
     }
 }

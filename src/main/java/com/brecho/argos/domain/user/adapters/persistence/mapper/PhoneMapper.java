@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.user.adapters.persistance.mapper;
+package com.brecho.argos.domain.user.adapters.persistence.mapper;
 
-import com.brecho.argos.domain.user.adapters.persistance.entity.PhoneEntity;
+import com.brecho.argos.domain.user.adapters.persistence.entity.PhoneEntity;
 import com.brecho.argos.domain.user.core.models.Phone;
 import org.mapstruct.Mapper;
 

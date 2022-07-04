@@ -1,8 +1,7 @@
-package com.brecho.argos.domain.user.adapters.persistance.mapper;
+package com.brecho.argos.domain.user.adapters.persistence.mapper;
 
-import com.brecho.argos.domain.user.adapters.persistance.entity.UserEntity;
+import com.brecho.argos.domain.user.adapters.persistence.entity.UserEntity;
 import com.brecho.argos.domain.user.core.models.User;
-import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

@@ -1,4 +1,4 @@
-package com.brecho.argos.domain.user.adapters.persistance.entity;
+package com.brecho.argos.domain.user.adapters.persistence.entity;
 
 import com.brecho.argos.domain.user.core.enums.Role;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "addresses")
+@Table(name = "users")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -39,7 +39,9 @@ public class UserEntity {
     private LocalDate birthdate;
 
     @Enumerated
-    @Column(name = "role")
+    @ElementCollection(targetClass = Role.class)
+    @JoinTable(name = "users", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "role", nullable = false)
     private List<Role> roles;
 
     @Column(name = "created_at")

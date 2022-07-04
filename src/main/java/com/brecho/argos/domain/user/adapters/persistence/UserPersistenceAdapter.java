@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.user.adapters.persistance;
+package com.brecho.argos.domain.user.adapters.persistence;
 
-import com.brecho.argos.domain.user.adapters.persistance.repository.UserRepository;
+import com.brecho.argos.domain.user.adapters.persistence.repository.UserRepository;
 import com.brecho.argos.domain.user.core.models.User;
 import com.brecho.argos.domain.user.core.ports.GetUserPort;
 import lombok.RequiredArgsConstructor;

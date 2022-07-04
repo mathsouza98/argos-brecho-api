@@ -1,13 +1,14 @@
 package com.brecho.argos.domain.sale.adapters.api.models.response;
 
-import com.brecho.argos.domain.sale.core.models.Product;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 public class SaleItemResponse {
     private String id;
-    private Product product;
+    private ProductResponse product;
     private int amount;
 }

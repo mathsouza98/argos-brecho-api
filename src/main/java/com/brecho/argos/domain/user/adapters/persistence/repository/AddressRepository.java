@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.user.adapters.persistance.repository;
+package com.brecho.argos.domain.user.adapters.persistence.repository;
 
-import com.brecho.argos.domain.user.adapters.persistance.entity.AddressEntity;
+import com.brecho.argos.domain.user.adapters.persistence.entity.AddressEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.brecho.argos.domain.user.adapters.persistance.entity;
+package com.brecho.argos.domain.user.adapters.persistence.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

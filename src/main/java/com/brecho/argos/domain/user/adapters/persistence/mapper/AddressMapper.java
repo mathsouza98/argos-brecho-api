@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.user.adapters.persistance.mapper;
+package com.brecho.argos.domain.user.adapters.persistence.mapper;
 
-import com.brecho.argos.domain.user.adapters.persistance.entity.AddressEntity;
+import com.brecho.argos.domain.user.adapters.persistence.entity.AddressEntity;
 import com.brecho.argos.domain.user.core.models.Address;
 import org.mapstruct.Mapper;
 

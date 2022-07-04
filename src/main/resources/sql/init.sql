@@ -1,14 +1,5 @@
 create database argosdb;
 
-create table if not exists argosdb.phones (
-    id varchar(36) not null,
-    region_code varchar(2) not null,
-    value varchar(15) not null,
-    user_id varchar(36) not null,
-    foreign key (user_id) references users(id),
-    primary key (id)
-);
-
 create table if not exists argosdb.users (
     id varchar(36) not null,
     username varchar(20) not null,
@@ -20,6 +11,15 @@ create table if not exists argosdb.users (
     role int not null,
     created_at datetime not null,
     updated_at datetime,
+    primary key (id)
+);
+
+create table if not exists argosdb.phones (
+    id varchar(36) not null,
+    region_code varchar(2) not null,
+    value varchar(15) not null,
+    user_id varchar(36) not null,
+    foreign key (user_id) references users(id),
     primary key (id)
 );
 
@@ -36,9 +36,10 @@ create table if not exists argosdb.addresses (
     primary key (id)
 );
 
-create table if not exists argosdb.products_classification (
+create table if not exists argosdb.product_classifications (
     id varchar(36) not null,
-    value varchar(50)
+    value varchar(50),
+    primary key (id)
 );
 
 create table if not exists argosdb.products (
@@ -48,10 +49,10 @@ create table if not exists argosdb.products (
     created_at datetime not null,
     updated_at datetime,
     seller_id varchar(36) not null,
-    products_classification_id varchar(36) not null,
+    product_classification_id varchar(36) not null,
     primary key (id),
-    foreign key (seller_id) references sellers(id),
-    foreign key (products_classification_id) references sellers(id)
+    foreign key (seller_id) references users(id),
+    foreign key (product_classification_id) references product_classifications(id)
 );
 
 create table if not exists argosdb.inventory_items (
@@ -71,10 +72,10 @@ create table if not exists argosdb.sales (
     total_value decimal(7,2) not null check (total_value > 0.00),
     buyer_id varchar(36) not null,
     primary key (id),
-    foreign key (buyer_id) references buyers(id)
+    foreign key (buyer_id) references users(id)
 );
 
-create table if not exists argosdb.sales_items (
+create table if not exists argosdb.sale_items (
     id varchar(36) not null,
     product_id varchar(36) not null,
     sale_id varchar(36) not null,

@@ -1,6 +1,6 @@
-package com.brecho.argos.domain.user.adapters.persistance.repository;
+package com.brecho.argos.domain.user.adapters.persistence.repository;
 
-import com.brecho.argos.domain.user.adapters.persistance.entity.PhoneEntity;
+import com.brecho.argos.domain.user.adapters.persistence.entity.PhoneEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
