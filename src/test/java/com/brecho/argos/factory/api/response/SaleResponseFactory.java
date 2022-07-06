@@ -1,5 +1,6 @@
 package com.brecho.argos.factory.api.response;
 
+import com.brecho.argos.domain.sale.adapters.api.mapper.JsonMapper;
 import com.brecho.argos.domain.sale.adapters.api.models.response.ProductResponse;
 import com.brecho.argos.domain.sale.adapters.api.models.response.SaleItemResponse;
 import com.brecho.argos.domain.sale.adapters.api.models.response.SaleResponse;
