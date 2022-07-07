@@ -74,6 +74,8 @@ class SaleControllerTest {
 
         //when
         when(saleFacade.createSale(any(), any())).thenThrow(UnavailableItemException.class);
+
+        //then
         mockMvc.perform(post("/v1/sale", saleRequest, buyerId))
                 .andExpect(status().isNotFound());
     }
@@ -87,6 +89,8 @@ class SaleControllerTest {
 
         //when
         when(saleFacade.createSale(any(), any())).thenThrow(InsufficientQuantityItemException.class);
+
+        //then
         mockMvc.perform(post("/v1/sale", saleRequest, buyerId))
                 .andExpect(status().isUnprocessableEntity());
     }
@@ -100,6 +104,8 @@ class SaleControllerTest {
 
         //when
         when(saleFacade.createSale(any(), any())).thenThrow(UserNotFoundException.class);
+
+        //then
         mockMvc.perform(post("/v1/sale", saleRequest, buyerId))
                 .andExpect(status().isNotFound());
     }
@@ -113,6 +119,8 @@ class SaleControllerTest {
 
         //when
         when(saleFacade.createSale(any(), any())).thenThrow(BuyerCannotBeSellerException.class);
+
+        //then
         mockMvc.perform(post("/v1/sale", saleRequest, buyerId))
                 .andExpect(status().isBadRequest());
     }
@@ -126,6 +134,8 @@ class SaleControllerTest {
 
         //when
         when(saleFacade.createSale(any(), any())).thenThrow(EmptyArgumentsException.class);
+
+        //then
         mockMvc.perform(post("/v1/sale", saleRequest, buyerId))
                 .andExpect(status().isBadRequest());
     }
