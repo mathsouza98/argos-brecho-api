@@ -119,7 +119,6 @@ class CreateSaleUseCaseTest {
         //when
         when(getUserPort.userExists(any())).thenReturn(false);
         when(getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(anyList())).thenReturn(availableItems);
-        when(getUserPort.userExists(any())).thenReturn(true);
         when(createSalePort.create(any(Sale.class))).thenAnswer(i -> i.getArguments()[0]);
 
         //then
