@@ -31,7 +31,7 @@ public class CreateSaleUseCase {
         List<String> productsIds = saleItems.stream().map(saleItem -> saleItem.getProduct().getId()).toList();
 
         try {
-            if (!getUserPort.userExists(sale.getBuyer())) throw new UserNotFoundException(sale.getBuyer());
+            if (!getUserPort.userExists(sale.getBuyer())) throw new UserNotFoundException();
             Map<String, InventoryItem> availableInventoryItems = getInventoryItemUseCase.getAvailableInventoryItemsByProductsIds(productsIds);
 
             for (SaleItem saleItem : saleItems) {
