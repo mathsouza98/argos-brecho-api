@@ -16,7 +16,7 @@ public class LoginUseCase {
     private final PasswordEncoder passwordEncoder;
     private final GetUserPort getUserPort;
 
-    String login(User userToLogin) {
+    public String login(User userToLogin) {
         User user = getUserPort.getUserByEmail(userToLogin.getEmail()).orElseThrow(UserNotFoundException::new);
         boolean passwordDoesNotMatch = !passwordEncoder.matches(userToLogin.getPassword(), user.getPassword());
         if (passwordDoesNotMatch) {
